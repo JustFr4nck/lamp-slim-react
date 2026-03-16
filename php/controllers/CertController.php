@@ -7,9 +7,9 @@
         public function index(Request $request, Response $response, $args){
         $mysqli_connection = new MySQLi('my_mariadb', 'root', 'ciccio', 'scuola');
 
-        $idAlunni = args["idAlunni"];
+        $idAlunni = $args["idAlunni"];
 
-        $result = $mysqli_connection->query("SELECT * FROM alunni a");
+        $result = $mysqli_connection->query("SELECT * FROM certificazioni c join alunni i on c.alunno_id = i.id WHERE i.id = '$id'");
         $results = $result->fetch_all(MYSQLI_ASSOC);
 
         $response->getBody()->write(json_encode($results));
